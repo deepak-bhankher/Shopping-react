@@ -6,7 +6,7 @@ const Page1 = () => {
          {/* Hero Section */}
       <div className="mt-10 md:mt-20 flex flex-col md:flex-row items-center md:items-start mx-4 md:mx-52">
         <div className="text-center md:text-left md:w-1/2">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold ">
             70% Off on all <br /> Products Sale
           </h1>
           <p className="mt-5 text-sm sm:text-base">
@@ -20,7 +20,7 @@ const Page1 = () => {
             Order Now
           </button>
         </div>
-        <div className="md:mt-0 md:ml-10 md:w-1/2 flex justify-center">
+        <div className="md:mt-0 md:ml-10 md:w-1/2 flex justify-center mt-10">
           <img
             src="big_sale.png"
             alt="sale"

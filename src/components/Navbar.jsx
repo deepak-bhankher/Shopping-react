@@ -38,7 +38,7 @@ function Navbar({ cart, search, setSearch, darkMode, setDarkMode }) {
           </div>
 
           {/* SEARCH */}
-          <div className="relative flex-1 max-w-md ml-auto">
+          <div className="relative flex-1 max-w-md ml-auto hidden md:block">
             <input
               type="text"
               placeholder="Search Product..."
@@ -53,26 +53,31 @@ function Navbar({ cart, search, setSearch, darkMode, setDarkMode }) {
             <IoMdSearch className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-300" />
           </div>
 
-          {/* DARK MODE */}
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="bg-black dark:bg-white text-white dark:text-black px-3 py-2 rounded-full hover:scale-105 transition-all duration-300 cursor-pointer text-sm shrink-0"
-          >
-            {darkMode ? "☀️" : "🌙"}
-          </button>
+          {/* RIGHT SIDE - dark mode always right, cart hidden on mobile */}
+          <div className="ml-auto flex items-center gap-3">
 
-          {/* CART */}
-          <button
-            onClick={() => navigate("/cart")}
-            className="relative bg-orange-500 cursor-pointer text-white p-3 rounded-full hover:scale-105 duration-300 transition-all shrink-0"
-          >
-            <FaCartShopping size={18} />
-            {cart.length > 0 && (
-              <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                {cart.length}
-              </span>
-            )}
-          </button>
+            {/* CART - desktop only */}
+            <button
+              onClick={() => navigate("/cart")}
+              className="relative bg-orange-500 cursor-pointer text-white p-3 rounded-full hover:scale-105 duration-300 transition-all shrink-0 hidden md:flex"
+            >
+              <FaCartShopping size={18} />
+              {cart.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {cart.length}
+                </span>
+              )}
+            </button>
+
+            {/* DARK MODE */}
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className="bg-black dark:bg-white text-white dark:text-black px-3 py-2 rounded-full hover:scale-105 transition-all duration-300 cursor-pointer text-sm shrink-0"
+            >
+              {darkMode ? "☀️" : "🌙"}
+            </button>
+
+          </div>
 
         </div>
       </div>
@@ -93,7 +98,7 @@ function Navbar({ cart, search, setSearch, darkMode, setDarkMode }) {
       {/* MOBILE MENU - smooth slide */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-amber-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700
-          ${menuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"}`}
+          ${menuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"}`}
       >
         <div className="flex flex-col px-6 py-3 gap-4">
           {navLinks.map((link) => (
@@ -106,6 +111,25 @@ function Navbar({ cart, search, setSearch, darkMode, setDarkMode }) {
               {link.label}
             </Link>
           ))}
+
+          {/* CART - mobile menu */}
+          <button
+            onClick={() => { navigate("/cart"); setMenuOpen(false); }}
+            className="flex items-center gap-3 text-sm font-medium dark:text-white hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-200 border-t border-gray-200 dark:border-gray-700 pt-4"
+          >
+            <div className="relative">
+              <FaCartShopping size={18} />
+              {cart.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                  {cart.length}
+                </span>
+              )}
+            </div>
+            Cart
+            {cart.length > 0 && (
+              <span className="text-orange-500 font-semibold">({cart.length})</span>
+            )}
+          </button>
         </div>
       </div>
     </div>
